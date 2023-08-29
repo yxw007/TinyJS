@@ -1,6 +1,7 @@
 const tokenizer = require('./tokenizer');
 const parser = require('./parser');
 const transformer = require('./transformer');
+const generateCode = require('./generateCode');
 module.exports = function compiler(input) {
 	// 1. Lexical Analysis -
 	//      Breaks the input code (string) into the basic syntax
@@ -16,8 +17,8 @@ module.exports = function compiler(input) {
 	//                     our target Javascript AST
 	const jsAST = transformer(lispAST);
 
-	// 4. Code Generation
-	//
-
-	return jsAST;
+	// 4. Code Generation - Transforms our target AST (object of objects)
+	//                      into actual code (string)
+	const jsCode = generateCode(jsAST);
+	return jsCode;
 }
